@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 import util.CoA_Interface;
 
-// A for Rock, B for Paper, and C for Scissors
-// X for Rock, Y for Paper, and Z for Scissors
 public class Day03 implements CoA_Interface {
 	
 	
@@ -31,10 +29,49 @@ public class Day03 implements CoA_Interface {
 	}
 
 	public String result01(LinkedList<String> input) {
-		return null;
+		int result = 0;
+		
+		for (int i = 0; i < input.size(); i++) {
+			String firstCompartment = input.get(i).substring(0, input.get(i).length()/2);
+			String secondCompartment = input.get(i).substring(input.get(i).length()/2, input.get(i).length());
+
+			boolean found = false; 
+			for (int j = 0; j < firstCompartment.length(); j++) {
+				for (int k = 0; k < secondCompartment.length(); k++) {
+					if (firstCompartment.charAt(j) == secondCompartment.charAt(k)) {
+						found = true;
+						if (Character.isLowerCase(firstCompartment.charAt(j))) { result += (firstCompartment.charAt(j) - 96); } else { result += (firstCompartment.charAt(j) - 38);}
+						break;
+					}
+				}
+				if (found) { break; }
+			}
+		}
+		return String.valueOf(result);
 	}
 
 	public String result02(LinkedList<String> input) {
-		return null;
+		int result = 0;
+		for (int i = 0; i < input.size(); i+=3) {
+			String firstElf = input.get(i);
+			String secondElf = input.get(i+1);
+			String thirdElf = input.get(i+2);
+			
+			boolean found = false; 
+			for (int j = 0; j < firstElf.length(); j++) {
+				for (int k = 0; k < secondElf.length(); k++) {
+					for (int l = 0; l < thirdElf.length(); l++) {
+						if (firstElf.charAt(j) == secondElf.charAt(k) && firstElf.charAt(j) == thirdElf.charAt(l)) {
+							found = true;
+							if (Character.isLowerCase(firstElf.charAt(j))) { result += (firstElf.charAt(j) - 96); } else { result += (firstElf.charAt(j) - 38);}
+							break;
+						}
+					}
+					if (found) {break;}
+				}
+				if (found) {break;}
+			}
+		}
+		return String.valueOf(result);
 	}
 }
